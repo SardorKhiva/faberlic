@@ -14,7 +14,7 @@ const PRECACHE_ASSETS = [
 // Install event - cache essential files
 self.addEventListener('install', (event) => {
     console.log('Service Worker installing...');
-    
+
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
@@ -28,7 +28,7 @@ self.addEventListener('install', (event) => {
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
     console.log('Service Worker activating...');
-    
+
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
@@ -46,7 +46,7 @@ self.addEventListener('activate', (event) => {
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
     // Skip cross-origin requests
-    if (!event.request.url.startsWith(self.location.origin) && 
+    if (!event.request.url.startsWith(self.location.origin) &&
         !event.request.url.includes('fonts.googleapis.com') &&
         !event.request.url.includes('fonts.gstatic.com') &&
         !event.request.url.includes('unsplash.com')) {
@@ -73,7 +73,7 @@ self.addEventListener('fetch', (event) => {
                 const responseToCache = response.clone();
 
                 // Cache images and fonts
-                if (event.request.url.includes('unsplash.com') || 
+                if (event.request.url.includes('unsplash.com') ||
                     event.request.url.includes('fonts.gstatic.com')) {
                     caches.open(RUNTIME_CACHE).then(cache => {
                         cache.put(event.request, responseToCache);
@@ -94,7 +94,7 @@ self.addEventListener('fetch', (event) => {
 // Background sync for offline form submissions (future enhancement)
 self.addEventListener('sync', (event) => {
     console.log('Background sync triggered');
-    
+
     if (event.tag === 'sync-orders') {
         event.waitUntil(
             // Handle syncing orders when back online
@@ -111,11 +111,11 @@ async function syncOrders() {
 // Push notifications (future enhancement)
 self.addEventListener('push', (event) => {
     console.log('Push notification received');
-    
+
     const options = {
         body: event.data ? event.data.text() : 'Yangi mahsulotlar mavjud!',
-        icon: '/icon-192.png',
-        badge: '/icon-192.png',
+        icon: '/icon-192.svg',
+        badge: '/icon-192.svg',
         vibrate: [200, 100, 200],
         data: {
             dateOfArrival: Date.now(),
@@ -125,7 +125,7 @@ self.addEventListener('push', (event) => {
             {
                 action: 'explore',
                 title: 'Ko\'rish',
-                icon: '/icon-192.png'
+                icon: '/icon-192.svg'
             },
             {
                 action: 'close',
@@ -142,7 +142,7 @@ self.addEventListener('push', (event) => {
 // Notification click handler
 self.addEventListener('notificationclick', (event) => {
     console.log('Notification clicked');
-    
+
     event.notification.close();
 
     if (event.action === 'explore') {
@@ -157,7 +157,7 @@ self.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
     }
-    
+
     if (event.data && event.data.type === 'CACHE_URLS') {
         const urlsToCache = event.data.payload;
         event.waitUntil(
