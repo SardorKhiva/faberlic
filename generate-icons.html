@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Generate PWA Icons</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;display:flex;flex-direction:column;gap:12px;padding:24px}
+    button{padding:10px 14px;border-radius:6px;border:1px solid #ccc;background:#f7f7f7}
+    img{max-width:150px;border:1px solid #ddd;padding:6px}
+  </style>
+</head>
+<body>
+  <h2>Сгенерировать PNG-иконки</h2>
+  <p>Нажмите, чтобы скачать `icon-192.png` и `icon-512.png`. Сохраните файлы в корень проекта.</p>
+
+  <div>
+    <button id="download-192">Скачать icon-192.png</button>
+    <button id="download-512">Скачать icon-512.png</button>
+  </div>
+
+  <p>Предпросмотр SVG (используется для генерации):</p>
+  <div>
+    <img id="preview-192" src="icon-192.svg" alt="icon-192">
+    <img id="preview-512" src="icon-512.svg" alt="icon-512">
+  </div>
+
+<script>
+async function svgToPng(svgUrl, size){
+  const res = await fetch(svgUrl);
+  const svgText = await res.text();
+
+  const canvas = document.createElement('canvas');
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  // Create image from SVG text
+  const svgBlob = new Blob([svgText], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+
+  return new Promise((resolve, reject) => {
+    img.onload = () => {
+      // fill background with theme color (optional)
+      ctx.fillStyle = '#d4a574';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      // draw svg centered and scaled
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(blob => resolve(blob), 'image/png');
+    };
+    img.onerror = (e) => reject(e);
+    img.src = url;
+  });
+}
+
+function downloadBlob(blob, filename){
+  const a = document.createElement('a');
+  const u = URL.createObjectURL(blob);
+  a.href = u; a.download = filename; document.body.appendChild(a);
+  a.click(); setTimeout(()=>{ URL.revokeObjectURL(u); a.remove(); }, 200);
+}
+
+document.getElementById('download-192').addEventListener('click', async () => {
+  try{
+    const b = await svgToPng('icon-192.svg', 192);
+    downloadBlob(b, 'icon-192.png');
+  }catch(e){ alert('Ошибка генерации: '+e); }
+});
+
+document.getElementById('download-512').addEventListener('click', async () => {
+  try{
+    const b = await svgToPng('icon-512.svg', 512);
+    downloadBlob(b, 'icon-512.png');
+  }catch(e){ alert('Ошибка генерации: '+e); }
+});
+</script>
+</body>
+</html>

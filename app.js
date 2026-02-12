@@ -118,7 +118,12 @@ window.addEventListener('appinstalled', () => {
 // Register Service Worker for PWA
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
+        // Use correct path for GitHub Pages
+        const swPath = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'service-worker.js'
+            : '/faberlic/service-worker.js';
+        
+        navigator.serviceWorker.register(swPath)
             .then(registration => {
                 console.log('Service Worker registered successfully:', registration.scope);
                 

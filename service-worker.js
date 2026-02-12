@@ -114,8 +114,8 @@ self.addEventListener('push', (event) => {
 
     const options = {
         body: event.data ? event.data.text() : 'Yangi mahsulotlar mavjud!',
-        icon: '/icon-192.svg',
-        badge: '/icon-192.svg',
+        icon: '/icon-192.png',
+        badge: '/icon-192.png',
         vibrate: [200, 100, 200],
         data: {
             dateOfArrival: Date.now(),
@@ -125,7 +125,7 @@ self.addEventListener('push', (event) => {
             {
                 action: 'explore',
                 title: 'Ko\'rish',
-                icon: '/icon-192.svg'
+                icon: '/icon-192.png'
             },
             {
                 action: 'close',
