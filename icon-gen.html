@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator</title>
+</head>
+<body>
+    <canvas id="canvas192" width="192" height="192"></canvas>
+    <canvas id="canvas512" width="512" height="512"></canvas>
+    <script>
+        function createIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#d4a574');
+            gradient.addColorStop(1, '#e8c9a5');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Letter F
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${size * 0.5}px Cormorant Garamond, serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('F', size / 2, size / 2);
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        console.log('Icons generated - save manually from browser');
+    </script>
+</body>
+</html>

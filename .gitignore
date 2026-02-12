@@ -1,0 +1,28 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.cache/
+
+# Build files (if added later)
+dist/
+build/
+
+# Node modules (if added later)
+node_modules/
+
+# Environment
+.env
+.env.local

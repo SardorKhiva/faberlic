@@ -1,0 +1,78 @@
+{
+  "name": "Faberlic - Go'zallik Galereya",
+  "short_name": "Faberlic",
+  "description": "Faberlic go'zallik va salomatlik mahsulotlari katalogi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf8f5",
+  "theme_color": "#d4a574",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "uz",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "shopping",
+    "lifestyle",
+    "beauty"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Yuz parvarishi",
+      "short_name": "Yuz",
+      "description": "Yuz parvarishi mahsulotlari",
+      "url": "/#yuz-parvarishi",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Atirlar",
+      "short_name": "Atir",
+      "description": "Atir va parfyumeriya",
+      "url": "/#atir",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
