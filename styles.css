@@ -1,3 +1,9 @@
+/* Responsive video styles */
+.responsive-video {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 800px; /* Optional: limit max width */
+}
 :root {
     /* Light theme colors - elegant cosmetics palette */
     --bg-primary: #faf8f5;
